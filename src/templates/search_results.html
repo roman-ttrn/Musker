@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Results of search on "{{ search }}":</h1>
+
+{% for meep in meeps %}
+    <div class="alert alert-dark" role="alert">
+        <div class="container">
+            <div class="row">
+              <div class="col-2">
+                      <img src="{{ meep.user.profile.prof_image.url }}" class="rounded-circle" width=80 height=80>
+              </div>
+  
+                    <div class="col-10">
+                      <b>{{ meep.body }}<br></b>
+                      <small class="text-muted">
+                          {{ meep.created }}<br>
+                          By
+                          <a href="{% url 'profile' meep.user.id%}">@{{ meep.user.username|lower }}<br></a>
+                          <b>{{ meep.num_of_likes }}</b> Likes <br>
+                          {% if user in meep.likes.all %}
+                            <a href="{% url 'meep-likes' meep.id %}">👎🏼</a>
+                          {% else %}
+                            <a href="{% url 'meep-likes' meep.id %}">👍</a>
+                          {% endif %}
+                          <br>
+                          <a href="{% url 'meep' meep.id %}">👁️‍🗨️</a>
+                      </small>
+                    </div><br/><br/>
+                </div>
+            </div>
+          </div>
+{% endfor %}
+
+{% endblock %}

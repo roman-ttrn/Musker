@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environments
+.env
+venv/
+*.sqlite3
+
+# Docker
+*.pid
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Static/media (если генерируются)
+staticfiles/
+media/
+
+# PostgreSQL volume (если есть)
+postgres_data/

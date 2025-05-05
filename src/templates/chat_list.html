@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>My chats</h2>
+    <ul class="list-group">
+        Chats: <br>
+        {% for chat in chats %}
+            <li class="list-group-item">
+                {% for part in chat.participants.all %}
+                {% if part.username != user.username %}
+                <a href="{% url 'chat_detail' chat.id %}" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">
+                    {{ part.username }} <br>
+                    <img src="{{ part.profile.prof_image.url }}" height=70 width=70><br></br>
+                {% endif %}
+        {% endfor %}
+            </li>     
+        {% empty %}
+            <li class="list-group-item">You don't have any chats yet...<a href="{% url 'profile_list' %}">But you can fix it!</a></li>
+            {% endfor %}
+    </ul>
+</div>
+{% endblock %}

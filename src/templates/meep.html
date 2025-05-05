@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-body">
+        <div class="col-12">
+            <img src="{{ meep.user.profile.prof_image.url }}" class="rounded-circle" width=80 height=80>
+    </div><br/>
+      <p class="card-text">{{ meep.body }}</p>
+      <a href="{% url 'profile' meep.user.id %}">@{{ meep.user.username|lower }}</a><br>
+      <small class="text-muted">{{ meep.created }}<small/>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Chat with {{ chat.participants.all.0 }}</h2>
+    <div class="card">
+        <div class="card-body" style="height: 300px; overflow-y: scroll;">
+            {% for message in messagesss %}
+                <p><strong>{{ message.sender.username }}</strong>: {{ message.content }}</p>
+            {% empty %}
+                <p>There are no meassages yet...</p>
+            {% endfor %}
+        </div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+
+{% endblock %}
