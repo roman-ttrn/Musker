@@ -4,7 +4,8 @@ FROM python:3.11-slim
 # Устанавливаем переменные окружения
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH /app
+ENV PYTHONPATH=/app/src
+WORKDIR /app/src
 
 # Сначала копируем только requirements.txt
 COPY --chown=appuser:appuser requirements.txt .
