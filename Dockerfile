@@ -11,7 +11,7 @@ COPY --chown=appuser:appuser requirements.txt .
 
 # Устанавливаем зависимости
 RUN pip install --upgrade pip && \
-    pip install --user -r requirements.txt
+    pip install -r requirements.txt
 
 # Копируем остальной код
 COPY --chown=appuser:appuser . .
