@@ -4,16 +4,17 @@ FROM python:3.11-slim
 # Устанавливаем переменные окружения
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH /app
 
-# Устанавливаем рабочую директорию
-WORKDIR /app
-
-# Копируем файлы проекта
-COPY . /app/
+# Сначала копируем только requirements.txt
+COPY --chown=appuser:appuser requirements.txt .
 
 # Устанавливаем зависимости
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --user -r requirements.txt
 
-# Собираем статические файлы
-RUN python manage.py collectstatic --noinput
+# Копируем остальной код
+COPY --chown=appuser:appuser . .
+
+# Команда для запуска (collectstatic лучше делать здесь)
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn your_project.wsgi:application --bind 0.0.0.0:8000"]
